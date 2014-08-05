@@ -1,0 +1,242 @@
+\documentclass[11pt, fleqn, a4paper, leqno]{scrartcl} %A4
+\usepackage[utf8x]{inputenc} %Eingabe
+\usepackage[T1]{fontenc} %Font
+
+\usepackage[ngerman]{babel} %Trennnung
+\usepackage{amsmath} %Mathesysmbole
+\usepackage{graphicx} %Grafiken
+\usepackage{listings} %Programmcode
+\usepackage{tikz} %Grafiken malen
+
+\definecolor{mygreen}{rgb}{0,0.6,0}
+\definecolor{mygray}{rgb}{0.5,0.5,0.5}
+\definecolor{mymauve}{rgb}{0.58,0,0.82}
+
+\lstset{ %
+  backgroundcolor=\color{white},   % choose the background color; you must add \usepackage{color} or \usepackage{xcolor}
+  basicstyle=\footnotesize,        % the size of the fonts that are used for the code
+  breakatwhitespace=false,         % sets if automatic breaks should only happen at whitespace
+  breaklines=true,                 % sets automatic line breaking
+  captionpos=b,                    % sets the caption-position to bottom
+  commentstyle=\color{mygreen},    % comment style
+  deletekeywords={...},            % if you want to delete keywords from the given language
+  escapeinside={\%*}{*)},          % if you want to add LaTeX within your code
+  extendedchars=true,              % lets you use non-ASCII characters; for 8-bits encodings only, does not work with UTF-8
+  frame=single,                    % adds a frame around the code
+  keepspaces=true,                 % keeps spaces in text, useful for keeping indentation of code (possibly needs columns=flexible)
+  keywordstyle=\color{blue},       % keyword style
+  language=Octave,                 % the language of the code
+  morekeywords={*,...,mean,avg,clone},            % if you want to add more keywords to the set
+  numbers=left,                    % where to put the line-numbers; possible values are (none, left, right)
+  numbersep=5pt,                   % how far the line-numbers are from the code
+  numberstyle=\tiny\color{mygray}, % the style that is used for the line-numbers
+  rulecolor=\color{black},         % if not set, the frame-color may be changed on line-breaks within not-black text (e.g. comments (green here))
+  showspaces=false,                % show spaces everywhere adding particular underscores; it overrides 'showstringspaces'
+  showstringspaces=false,          % underline spaces within strings only
+  showtabs=false,                  % show tabs within strings adding particular underscores
+  stepnumber=2,                    % the step between two line-numbers. If it's 1, each line will be numbered
+  stringstyle=\color{mymauve},     % string literal style
+  tabsize=1,                       % sets default tabsize to 2 spaces
+  title=\lstname                   % show the filename of files included with \lstinputlisting; also try caption instead of title
+}
+
+
+\title{Zusammenfassung: Objektorientierte Programmierung}
+\author{Andreas Ruscheinski}
+
+\begin{document}
+\maketitle
+\section{Software Patterns}
+	\subsection{Einteilung}
+		\subsubsection{Anwendungsbereich: Klassenmuster}
+			\begin{itemize}
+				\item Beziehungen von Klassen zur Compilezeit festsetzen
+			\end{itemize}
+		\subsubsection{Anwendungsbereich: Objektmuster}
+			\begin{itemize}
+				\item Beziehungen zwischen Klassen beschreiben Relation von Objketen (Aggregation und Assoziation)
+				\item variabel zur Laufzeit
+			\end{itemize}
+		\subsubsection{Zweck: Erzeugungsmuster}
+			\begin{itemize}
+				\item Aufgabe: Erzeugung von Objekten
+				\item Klassenmuster: nutzen von Vererbung, zum Klasse des zu erzeugenden Objektes zu variieren
+				\item Objektmuster: delegieren Objekterzeugung an ein anderes Objekt
+				\item Bsp: Anzahl der erzeugten Elemente varieren oder konkrete Typ abhängig von Situation anpassen		
+			\end{itemize}
+		\subsubsection{Zweck: Strukturmuster}
+			\begin{itemize}
+				\item Aufgabe: Vereinfachung der Struktur zwischen Klassen
+				\item Klassenmuster: nutzen Vererbung, um Schnittstellen und Implementierungen zusammenzuführen
+				\item Objektmuster: Objekte zusammenzuführen
+				\item Bsp: Vereinfachung von komplexen Beziehungen		
+			\end{itemize}
+		\subsubsection{Zweck: Verhaltensmuster}
+			\begin{itemize}
+				\item Aufgabe: Beiflussung mit dem Verhalten von Klassen
+				\item Klassenmuster: Vererbung um Verhalten unter den Klassen zu verteilen
+				\item Objektmuster: Aggregation anstelle von Vererbung
+				\item Bsp: Vereinfachung des Nachrichtenaustausches
+			\end{itemize}
+	\newpage
+	\subsection{Patterns}
+		\subsubsection{Observer}
+			\begin{itemize}
+				\item Kategorie: Verhaltensmuster
+				\item Zweck: Bei Änderungen des Zustandes sollen alle abhängigen Objekte benachrictigt und aktualisiert werden 
+				\item Akteure:
+					\begin{itemize}
+						\item Subjekt: kennt Liste von Beobachtern, Schnittstelle für An- und Abmelden von Beobachtern
+						\item KonkretesSubjekt: speichert des Zustand und benachrichtigt alle Beobachter bei Änderungen des Zustandens
+						\item Beobachter: definiert Aktualisierungssschnittstelle
+						\item KonkreterBeobachter: Referenz zum KonkretenSubjekt, speichert den Zustand, implementiert Beobachter
+					\end{itemize}
+
+				\item Ablauf:
+					\begin{enumerate}
+						\item  setState() ändert Zustand des Subjektes
+						\item Änderung am Subjekt bewirkt iterative Benachrichtigung der angemeldeten Beobachter
+						\item Bei Benachrichtung des Beobachters holt dieser den neuen Zustand mit getState()
+					\end{enumerate}
+				\item Beispiel: Änderungen an der Börse(Konkretes Subjekt) sollen alle Broker(Konkreter Beobachter) benachrichtigt werden
+			\end{itemize}
+			\includegraphics[scale=0.5]{images/observer.png}
+		\newpage
+		\subsubsection{Prototype}
+			\begin{itemize}
+				\item Kategorie: Erzeugungsmuster
+				\item Zweck: Instanz eines Objektes wird zur Erzeugung weiterer Objekte genutzt, welche dabei Kopien der Instanz sind
+				\item Akteure: 
+					\begin{itemize}
+						\item Prototype: Schnittstelle welche das Klonen von Objekten zusichert
+						\item KonkreterPrototype: Implementiert die Schnittstelle
+					\end{itemize}
+				\item Ablauf:
+					\begin{enumerate}
+						\item Klient ruft clone() auf dem Prototype auf
+						\item Klient bekommt KonkreterPrototype1 oder KonkreterPrototype2, abhängig von dem hinterlegten Prototype
+					\end{enumerate}
+				\item Beispiel: 
+			\end{itemize}
+			\begin{lstlisting}[frame=single,language=Java]
+				data = getData();
+				//Analyse der Daten durch verschiedene Functionen
+				avgData = avg(data.clone());
+				meanData = mean(data.clone());
+				//data hat sich nicht veraendert
+			\end{lstlisting}
+			\includegraphics[scale=0.6]{images/prototype.png}
+		\newpage		
+		\subsubsection{Command}
+			\begin{itemize}
+				\item Kategorie: Verhaltensmuster
+				\item Zweck: Für ein interaktives System soll ein Mehrstufiges, nicht limitiertes rückgängig Machen und Wiederholen von Aktionen möglich seins
+				\item Akteure: 
+					\begin{itemize}
+						\item Klient: erzeugt KonkreterBefehl mit Verweis zum Empfänger, gibt Aufrufer eine Referenz auf den KonkretenBefehl
+						\item Empfänger: KonkreterBefehl ruft Methoden des Empfängers um seine Aktion auszuführen
+						\item Aufrufer: Besitzt Verweise auf Befehle, fordert Befehle  bei Bedarf auf
+						\item Befehl: definiert Schnittstelle zum Ausführen eines Befehls
+						\item KonkreterBefehl: implementiert Schnittstelle, speichert Referenz zum Empfänger und für die Ausführung nötigen Zustand
+					\end{itemize}
+				\item Ablauf:
+					\begin{enumerate}
+						\item Client führt Befehl aus
+						\item Befehl kennt Empfänger und ruft execute() auf Empfänger auf
+						\item Implementierung von Undo und Redo über Speicherung der Befehle im Aufrufer
+					\end{enumerate}
+				\item Beispiel: zeilenweises Editieren mit einem Texteditor (Löschen, Ersetzen, Einfügen) und diese Aktionen rückgängigmachen
+			\end{itemize}
+			\includegraphics[scale=0.8]{images/commando.png}
+			\newpage
+		\subsubsection{Iterator}
+			\begin{itemize}
+				\item Kategorie: Verhaltensmuster
+				\item Zweck: Bereitstellung einer sequentiellen Reihenfolge von zusammengesetzte Objekte (Liste, Bäume, etc) mit Abstraktion von der Datenstruktur
+				\item Akteure: 
+					\begin{itemize}
+						\item Iterator: definiert Schnittstelle für den Besuch von Elementen
+						\item KonkreterIterator: implementiert Schnittstelle für den Besuch von Elementen, achtet auf die aktuelle Position in der Datenstruktur
+						\item Aggregat: definiert die Schnittstelle zur Erzeugung eines Iterators
+						\item KonkretesAggregat: implemtiert Schnittstelle zur Erzeuging eines Iterators
+					\end{itemize}
+				\item Ablauf:
+					\begin{enumerate}
+						\item KonrketerIterator implemtieren mit gewünschter Logik
+						\item KonkretesAggregat implementierenf
+						\item Arbeit mit dem Iterator
+					\end{enumerate}
+				\item Beispiel: Iterator über eine Liste mit Filterausdruck
+			\end{itemize}
+			\includegraphics[scale=0.8]{images/iterator.png}
+			\newpage
+		\subsubsection{Mediator}
+			\begin{itemize}
+				\item Kategorie: Verhaltensmuster
+				\item Zweck: Steuerung der Kommuinikation zwischen Objekten über einen gemeinsamen Vermittler
+				\item Akteure: 
+					\begin{itemize}
+						\item Vermittler: definiert Schnittstelle für die Kommunikation mit den Kollegen
+						\item KonkreterVermittler: implementiert die Vermittler Schnittstelle für das kooperative Verhalten durch die Koordination der beteiligten Kollegen, kennt und verwaltet Kollegen-Objekte
+						\item Kollegen-Klassen: jeder Kollege kennt sein Vermittler, kommunikation mit dem Vermittler anstatt mit dem anderen Objekt Kontakt aufzunehmen
+					\end{itemize}
+				\item Ablauf:
+					\begin{enumerate}
+						\item Kollege benachrichtigt Mediator über eine Änderung
+						\item Mediator benachricht alle anderen Beteiligten
+					\end{enumerate}
+				\item Hinweis: sehr änhnlich zum Observer, Unterschied: Observer 1:n Kommunikaton; Mediator: n:m Kommunikation
+				\item Beispiel: Chatroom Implementierung, Kollegen sind Benutzer (Bots oder Menschen), Vermittler ist ein Zentraler Server der alle Kollegen bei Nachrichten benachrichtigt			
+			\end{itemize}
+			\includegraphics{images/mediator.png}
+			\newpage
+		\subsubsection{Abstract Factory}
+			\begin{itemize}
+				\item Kategorie: Erzeugungsmuster
+				\item Zweck: Bereitstellung eines Interfaces zur Erzeugung von Objekt-Familien zur Laufzeit, ohne deren konkrete Klassen festzulegen
+				\item Akteure: 
+					\begin{itemize}
+						\item AbstrakteFabrik: definiert Schnittstelle für die Erzeugung AbstrakterProdukte einer Produktfamilie
+						\item KonkreteFabrik: erzeugt KonkreteProdukte durch implementierung der AbstrakteFabrik Schnittstelle
+						\item AbstraktesProdukt: definiert Schnittstelle für eine Produktart
+						\item KonkretesProdukt: implementiert die AbstraktesProdukt Schnittstelle
+						\item Klient: Nutzt die Schnittstelle der AbstractenFabrik und AbstrakterProdukte für weiteren Arbeitsverlauf 
+					\end{itemize}
+				\item Ablauf:
+					\begin{enumerate}
+						\item Definition der Schnittstellen
+						\item Implementierung von KonkratenProdukten
+						\item Implementierung von KonkretenFabriken
+						\item Klient arbeitet auf den Abstrakten Schnittstellen 
+					\end{enumerate}
+				\item Beispiel: GUI-Programmierung, AbstraktesProdukt: Button, KonkretesProdukt: LinuxButton, WindowsButton, AbstrakteFabrik: GUI-Dialog, KonkrateFabrik: Linux-GUI-Dialog(nutzt LinuxButton) usw...
+			\end{itemize}
+			\includegraphics[scale=0.5]{images/abstract-factory.png}
+			\newpage
+		\subsubsection{Builder}
+			\begin{itemize}
+				\item Kategorie: Erzeugungsmuster
+				\item Zweck: Trennung der Konstruktion komplexer Objekte von ihrer Repräsentation. Dadruch kann der gleiche Prozesss verschiedene Repräsentationen erzeugen.
+				\item Akteure: 
+					\begin{itemize}
+						\item
+					\end{itemize}
+				\item Ablauf:
+					\begin{enumerate}
+						\item
+					\end{enumerate}
+				\item Beispiel:
+			
+			\end{itemize}
+\end{document}
+				\item Kategorie:
+				\item Zweck:
+				\item Akteure: 
+					\begin{itemize}
+						\item
+					\end{itemize}
+				\item Ablauf:
+					\begin{enumerate}
+						\item
+					\end{enumerate}
+				\item Beispiel:
