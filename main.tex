@@ -219,14 +219,117 @@
 				\item Zweck: Trennung der Konstruktion komplexer Objekte von ihrer Repräsentation. Dadruch kann der gleiche Prozesss verschiedene Repräsentationen erzeugen.
 				\item Akteure: 
 					\begin{itemize}
-						\item
+						\item Erbauer: spezifiziert abstracte Schnittstelle zur Erzeugung
+						\item KonkreterErbauer: implementiert ErbauerSchnittstelle, definiert und verwaltet die von ihm erzeugte Repräsentation, ermöglicht Rückgabe von des Produktess
+						\item Direktor: konsturiert ein Objekt entsprechend der Erbauerschnittstelle
+						\item Produkt: repräsentiert gerade konstruierte komplexe Objekte
+					\end{itemize}
+				\item Ablauf:
+					\begin{enumerate}
+						\item Client erstellt KonkretenBuilder
+						\item Client erstellt Director und weist KonkretenBuilder zu
+						\item direktor.construct() bewirkt die Erstellung des Produktes
+						\item builder.getResult() liefert das Produkt 
+					\end{enumerate}
+				\item Beispiel: Vermeidung von meheren Konstruktoren einer Klasse mit unterschiedlichen Parameter, sondern Konfiguration einer zu erstellenden Instanz über verschiedene Diretoren
+			\end{itemize}
+			\includegraphics{images/builder.jpg}
+			\newpage
+		\subsubsection{Singleton}
+			\begin{itemize}
+				\item Kategorie: Erzeugungsmuster
+				\item Zweck: Stellt sicher, dass es nur eine Instanz einer Klasse existieren kann
+				\item Akteure: 
+					\begin{itemize}
+						\item Singleton: implementiert Logik welche garantiert das es nur eine Instance einer Klasse geben kann und bietet Schnittstelle für den Zugriff auf das Singleton Objekt
+					\end{itemize}
+				\item Beispiel: Erstellung einer zentralen Abstract Factory
+			\end{itemize}
+		\newpage
+		\subsubsection{Factory Method}
+			\begin{itemize}
+				\item Kategorie: Erzeugungsmuster
+				\item Zweck: Definiert eine Schnittstelle zur Erzeugung eines Objektes, wobei die Unterklassen entscheiden, von welcher Klasse das zu erzeugende Objekt ist.
+				\item Akteure: 
+					\begin{itemize}
+						\item Produkt: bietet Schnittstelle nach ausssen
+						\item KonkretesProdukt: implementiert die Produkt Schnittstelle
+						\item Erzeuger: abstrakt, delegiert konkrete Objektinstanzierung an  Unterklasse
+						\item KonkreterErzeuger: Entscheidet welches KonkretesProdukt erstellt wird
+					\end{itemize}
+				\item Beispiel:???
+			\end{itemize}
+			\includegraphics{images/factory-method.png}
+		\newpage
+		\subsubsection{Bridge}
+			\begin{itemize}
+				\item Kategorie: Strukturmuster
+				\item Zweck: Entkoppelung einer Abstraktion von ihrer Implementierung
+				\item Akteure: 
+				\begin{itemize}
+					\item Abstraktion: verwaltet Referenz auf Implementierer, definiert Schnittstelle der Abstraktion
+					\item SpezialisierteAbstraktion: erweitert Schnittstelle der Abstraktion
+					\item Implementierer: definiert Schnittstelle für Implementierungsklassen
+					\item KonkreterImplementierer: implementiert ImplementiererSchnittstelle
+				\end{itemize}
+				\item Ablauf:
+				\begin{enumerate}
+					\item Trennung der verschieden Abstraktionen von unterschiedlichen Implementierungen. Kommunikation über Brüke von Abstraktion und Implementierer
+				\end{enumerate}
+				\item Beispiel:			
+			\end{itemize}
+			\includegraphics[scale=0.4]{images/bridge-example.jpg}\\
+			\includegraphics[scale=0.4]{images/bridge.png}
+			\newpage
+		\subsubsection{Adapter}
+			\begin{itemize}
+				\item Kategorie: Strukturmuster
+				\item Zweck: Anspasssen der Schnittstellen inkompatibler Klassen
+				\item Akteure: 
+				\begin{itemize}
+					\item Ziel: spezifiziert die neue Schnittstelle
+					\item Adapter: implementiert die neue Schnittstelle und greift dabei auf Methoden der AdaptiertenKlasse zu
+					\item AdaptierteKlassse: inkompatible Klasse
+				\end{itemize}
+				\item Ablauf:
+				\begin{enumerate}
+					\item Spezifikation von Ziel
+					\item Implementation der Schnittstelle Ziel im Adapter unter Verwendung von Mehrfachvererbung(Klassenadapter) bzw. Objektkomposition(Objektadapter)
+				\end{enumerate}
+				\item Beispiel: Austausch einer Biblothek durch eine mit ähnlichen Funktionen, dadruch viel Aufwand den Code neuanzupassen. AdapterLösung: Altes Interface durch Nutzung der neuen Biblothek nachstellen.
+			\end{itemize}
+			\includegraphics[scale=0.7]{images/adapter.png}
+			\newpage
+		\subsubsection{Proxy}
+			\begin{itemize}
+				\item Kategorie: Strukturmuster
+				\item Zweck: Kontrolle des Zugriffes auf ein Objekt mit Hilfe eines vorgelagerten Stellvertreterobjektes
+				\item Akteure: 
+					\begin{itemize}
+						\item Subjekt: definiert die gemeinsame Schnittstelle von Stellvertreter und realem Subjekt
+						\item Proxy: implementiert die Subjekt Schnittstelle, verwaltet Referenz auf das EchteSubjekt
+						\item EchtesSubjekt: das durch den Stellvertreter repräsentierte Objekt.
+					\end{itemize}
+				\item Beispiel: LazyLoading von Objekten aus einer Datenbank (Daten des abgerufenen Objektes werden erst angefragt wenn auf diese zugegriffen wird)
+			\end{itemize}
+			\includegraphics[scale=0.7]{images/proxy.png}
+			\newpage
+		\subsubsection{Visitor}
+			\begin{itemize}
+				\item Kategorie: Verhaltensmuster
+				\item Zweck: Kapselung einer auf den Elementen einer Objektstruktur auszuführenden Operation als ein Objekt. Definition einer neuen Operation ohne Veränderung der Klasse der von ihr bearbeitetten Elemente.
+				\item Akteure: 
+					\begin{itemize}
+						\item Besucher: deklariert Besuche-Operationen Schnittstelle für konkrete Elemente
+						\item KonkreterBesucher: implementiert die Besucher Schnittstelle, jede Methode implementiert ein Fragment des Algorithmus, der auf die Struktur angewandt wird
+						\item Element: Schnittstelle für NimmEntgegen-Operation
+						\item KonkretesElement: implementiert Element Schnittstelle
 					\end{itemize}
 				\item Ablauf:
 					\begin{enumerate}
 						\item
 					\end{enumerate}
-				\item Beispiel:
-			
+				\item Beispiel:			
 			\end{itemize}
 \end{document}
 				\item Kategorie:
