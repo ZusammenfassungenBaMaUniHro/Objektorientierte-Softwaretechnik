@@ -68,7 +68,7 @@
 				\item Aufgabe: Erzeugung von Objekten
 				\item Klassenmuster: nutzen von Vererbung, zum Klasse des zu erzeugenden Objektes zu variieren
 				\item Objektmuster: delegieren Objekterzeugung an ein anderes Objekt
-				\item Bsp: Anzahl der erzeugten Elemente varieren oder konkrete Typ abhängig von Situation anpassen		
+				\item Bsp: Anzahl der erzeugten Elemente variieren oder konkrete Typ abhängig von Situation anpassen		
 			\end{itemize}
 		\subsection{Zweck: Strukturmuster}
 			\begin{itemize}
@@ -79,7 +79,7 @@
 			\end{itemize}
 		\subsection{Zweck: Verhaltensmuster}
 			\begin{itemize}
-				\item Aufgabe: Beiflussung mit dem Verhalten von Klassen
+				\item Aufgabe: Beeinflussung mit dem Verhalten von Klassen
 				\item Klassenmuster: Vererbung um Verhalten unter den Klassen zu verteilen
 				\item Objektmuster: Aggregation anstelle von Vererbung
 				\item Bsp: Vereinfachung des Nachrichtenaustausches
@@ -90,19 +90,19 @@
 		\subsubsection{Observer}
 			\begin{itemize}
 				\item Kategorie: Verhaltensmuster
-				\item Zweck: Bei Änderungen des Zustandes sollen alle abhängigen Objekte benachrictigt und aktualisiert werden 
+				\item Zweck: Bei Änderungen des Zustandes sollen alle abhängigen Objekte benachrichtigt und aktualisiert werden 
 				\item Akteure:
 					\begin{itemize}
 						\item Subjekt: kennt Liste von Beobachtern, Schnittstelle für An- und Abmelden von Beobachtern
-						\item KonkretesSubjekt: speichert des Zustand und benachrichtigt alle Beobachter bei Änderungen des Zustandens
-						\item Beobachter: definiert Aktualisierungssschnittstelle
+						\item KonkretesSubjekt: speichert des Zustand und benachrichtigt alle Beobachter bei Änderungen des Zustandes
+						\item Beobachter: definiert Aktualisierungsschnittstelle
 						\item KonkreterBeobachter: Referenz zum KonkretenSubjekt, speichert den Zustand, implementiert Beobachter
 					\end{itemize}
 				\item Ablauf:
 					\begin{enumerate}
-						\item  setState() ändert Zustand des Subjektes
+						\item setState() ändert Zustand des Subjektes
 						\item Änderung am Subjekt bewirkt iterative Benachrichtigung der angemeldeten Beobachter
-						\item Bei Benachrichtung des Beobachters holt dieser den neuen Zustand mit getState()
+						\item Bei Benachrichtigung des Beobachters holt dieser den neuen Zustand mit getState()
 					\end{enumerate}
 				\item Beispiel: Änderungen an der Börse(Konkretes Subjekt) sollen alle Broker(Konkreter Beobachter) benachrichtigt werden
 			\end{itemize}
@@ -111,7 +111,7 @@
 		\subsubsection{Command}
 			\begin{itemize}
 				\item Kategorie: Verhaltensmuster
-				\item Zweck: Für ein interaktives System soll ein Mehrstufiges, nicht limitiertes rückgängig Machen und Wiederholen von Aktionen möglich seins
+				\item Zweck: Für ein interaktives System soll ein Mehrstufiges, nicht limitiertes rückgängig Machen und Wiederholen von Aktionen möglich sein.
 				\item Akteure: 
 					\begin{itemize}
 						\item Klient: erzeugt KonkreterBefehl mit Verweis zum Empfänger, gibt Aufrufer eine Referenz auf den KonkretenBefehl
@@ -126,7 +126,7 @@
 						\item Befehl kennt Empfänger und ruft execute() auf Empfänger auf
 						\item Implementierung von Undo und Redo über Speicherung der Befehle im Aufrufer
 					\end{enumerate}
-				\item Beispiel: zeilenweises Editieren mit einem Texteditor (Löschen, Ersetzen, Einfügen) und diese Aktionen rückgängigmachen
+				\item Beispiel: zeilenweises Editieren mit einem Texteditor (Löschen, Ersetzen, Einfügen) und diese Aktionen rückgängig machen
 			\end{itemize}
 			\includegraphics[scale=0.8]{images/commando.png}
 			\newpage
@@ -139,7 +139,7 @@
 						\item Iterator: definiert Schnittstelle für den Besuch von Elementen
 						\item KonkreterIterator: implementiert Schnittstelle für den Besuch von Elementen, achtet auf die aktuelle Position in der Datenstruktur
 						\item Aggregat: definiert die Schnittstelle zur Erzeugung eines Iterators
-						\item KonkretesAggregat: implemtiert Schnittstelle zur Erzeuging eines Iterators
+						\item KonkretesAggregat: implementiert Schnittstelle zur Erzeugung eines Iterators
 					\end{itemize}
 				\item Ablauf:
 					\begin{enumerate}
@@ -154,19 +154,19 @@
 		\subsubsection{Mediator}
 			\begin{itemize}
 				\item Kategorie: Verhaltensmuster
-				\item Zweck: Steuerung der Kommuinikation zwischen Objekten über einen gemeinsamen Vermittler
+				\item Zweck: Steuerung der Kommunikation zwischen Objekten über einen gemeinsamen Vermittler
 				\item Akteure: 
 					\begin{itemize}
 						\item Vermittler: definiert Schnittstelle für die Kommunikation mit den Kollegen
 						\item KonkreterVermittler: implementiert die Vermittler Schnittstelle für das kooperative Verhalten durch die Koordination der beteiligten Kollegen, kennt und verwaltet Kollegen-Objekte
-						\item Kollegen-Klassen: jeder Kollege kennt sein Vermittler, kommunikation mit dem Vermittler anstatt mit dem anderen Objekt Kontakt aufzunehmen
+						\item Kollegen-Klassen: jeder Kollege kennt sein Vermittler, Kommunikation mit dem Vermittler anstatt mit dem anderen Objekt Kontakt aufzunehmen
 					\end{itemize}
 				\item Ablauf:
 					\begin{enumerate}
 						\item Kollege benachrichtigt Mediator über eine Änderung
-						\item Mediator benachricht alle anderen Beteiligten
+						\item Mediator benachrichtigt alle anderen Beteiligten
 					\end{enumerate}
-				\item Hinweis: sehr änhnlich zum Observer, Unterschied: Observer 1:n Kommunikaton; Mediator: n:m Kommunikation
+				\item Hinweis: sehr ähnlich zum Observer, Unterschied: Observer 1:n Kommunikation; Mediator: n:m Kommunikation
 				\item Beispiel: Chatroom Implementierung, Kollegen sind Benutzer (Bots oder Menschen), Vermittler ist ein Zentraler Server der alle Kollegen bei Nachrichten benachrichtigt			
 			\end{itemize}
 			\includegraphics{images/mediator.png}
@@ -174,7 +174,7 @@
 		\subsubsection{Visitor}
 			\begin{itemize}
 				\item Kategorie: Verhaltensmuster
-				\item Zweck: Kapselung einer auf den Elementen einer Objektstruktur auszuführenden Operation als ein Objekt. Definition einer neuen Operation ohne Veränderung der Klasse der von ihr bearbeitetten Elemente.
+				\item Zweck: Kapselung einer auf den Elementen einer Objektstruktur auszuführenden Operation als ein Objekt. Definition einer neuen Operation ohne Veränderung der Klasse der von ihr bearbeiteten Elemente.
 				\item Akteure: 
 					\begin{itemize}
 						\item Besucher: deklariert Besuche-Operationen Schnittstelle für konkrete Elemente
@@ -283,12 +283,12 @@
 		\subsubsection{Builder}
 			\begin{itemize}
 				\item Kategorie: Erzeugungsmuster
-				\item Zweck: Trennung der Konstruktion komplexer Objekte von ihrer Repräsentation. Dadruch kann der gleiche Prozesss verschiedene Repräsentationen erzeugen.
+				\item Zweck: Trennung der Konstruktion komplexer Objekte von ihrer Repräsentation. Dadurch kann der gleiche Prozesss verschiedene Repräsentationen erzeugen.
 				\item Akteure: 
 					\begin{itemize}
-						\item Erbauer: spezifiziert abstracte Schnittstelle zur Erzeugung
-						\item KonkreterErbauer: implementiert ErbauerSchnittstelle, definiert und verwaltet die von ihm erzeugte Repräsentation, ermöglicht Rückgabe von des Produktess
-						\item Direktor: konsturiert ein Objekt entsprechend der Erbauerschnittstelle
+						\item Erbauer: spezifiziert abstrakte Schnittstelle zur Erzeugung
+						\item KonkreterErbauer: implementiert ErbauerSchnittstelle, definiert und verwaltet die von ihm erzeugte Repräsentation, ermöglicht Rückgabe von des Produktes
+						\item Direktor: konstruiert ein Objekt entsprechend der Erbauerschnittstelle
 						\item Produkt: repräsentiert gerade konstruierte komplexe Objekte
 					\end{itemize}
 				\item Ablauf:
@@ -298,7 +298,7 @@
 						\item direktor.construct() bewirkt die Erstellung des Produktes
 						\item builder.getResult() liefert das Produkt 
 					\end{enumerate}
-				\item Beispiel: Vermeidung von meheren Konstruktoren einer Klasse mit unterschiedlichen Parameter, sondern Konfiguration einer zu erstellenden Instanz über verschiedene Diretoren
+				\item Beispiel: Vermeidung von mehren Konstruktoren einer Klasse mit unterschiedlichen Parameter, sondern Konfiguration einer zu erstellenden Instanz über verschiedene Direktoren
 			\end{itemize}
 			\includegraphics{images/builder.jpg}
 			\newpage
@@ -365,7 +365,7 @@
 					\item Spezifikation von Ziel
 					\item Implementation der Schnittstelle Ziel im Adapter unter Verwendung von Mehrfachvererbung(Klassenadapter) bzw. Objektkomposition(Objektadapter)
 				\end{enumerate}
-				\item Beispiel: Austausch einer Biblothek durch eine mit ähnlichen Funktionen, dadruch viel Aufwand den Code neuanzupassen. AdapterLösung: Altes Interface durch Nutzung der neuen Biblothek nachstellen.
+				\item Beispiel: Austausch einer Bibliothek durch eine mit ähnlichen Funktionen, dadurch viel Aufwand den Code neu anzupassen. Adapter Lösung: Altes Interface durch Nutzung der neuen Bibliothek nachstellen.
 			\end{itemize}
 			\includegraphics[scale=0.7]{images/adapter.png}
 			\newpage
@@ -391,9 +391,9 @@
 					\begin{itemize}
 						\item Komponente: definiert als Basisklasse das gemeinsame Verhalten aller Teilnehmer.
 						\item Blatt: repräsentiert Einzelobjekt, hat keine Kinder
-						\item Kompositum: enthält weitere Kompositum und Blätter (dadruch entsteht die Baumstruktur)
+						\item Kompositum: enthält weitere Kompositum und Blätter (dadurch entsteht die Baumstruktur)
 					\end{itemize}
-				\item Beispiel: Grafiken zeichen (Komponente), eine Grafik besteht dabei aus einem Text oder Rechteck (Blatt) oder setzt sich weiter zusammen (Kompositium)
+				\item Beispiel: Grafiken zeichnen (Komponente), eine Grafik besteht dabei aus einem Text oder Rechteck (Blatt) oder setzt sich weiter zusammen (Kompositum)
 			\end{itemize}
 			\includegraphics[scale=0.7]{images/composite.png}
 			\newpage
@@ -424,6 +424,6 @@
 					\begin{enumerate}
 						\item Facade implementieren so das alle benötigten Teile des Subsystemes bequem genutzt werden könne. Vorteil: Eine Facade ist zentrale Stelle für die Arbeit mit dem Subsystem, dadruch leichter zu warten und besser zum Fehler finden.
 					\end{enumerate}
-				\item Beispiel: Compiler(Facade) stellt Funktion zum compilieren eines Programmtextes. Das Subsystem (Parser, Scanner, Lexer, Codegenerator) werden über die Facade entsprechend der Semantik angesprochen. Man erhält also eine Kapselung der Interna eines Compilers nach aussen. 
+				\item Beispiel: Compiler(Facade) stellt Funktion zum compilieren eines Programmtextes. Das Subsystem (Parser, Scanner, Lexer, Codegenerator) werden über die Facade entsprechend der Semantik angesprochen. Man erhält also eine Kapselung der Interna eines Compilers nach außen. 
 			\end{itemize}
 \end{document}
