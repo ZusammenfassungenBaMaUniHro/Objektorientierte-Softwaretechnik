@@ -445,17 +445,17 @@
 					\end{enumerate}
 				\item Beispiel: Compiler(Facade) stellt Funktion zum compilieren eines Programmtextes. Das Subsystem (Parser, Scanner, Lexer, Codegenerator) werden über die Facade entsprechend der Semantik angesprochen. Man erhält also eine Kapselung der Interna eines Compilers nach außen. 
 			\end{itemize}
-	\section{Verhalten}
+	\section{Softwareentwicklung}
+	\subsection{Verhalten}
 		\begin{itemize}
 			\item Wenn unterschiedliche Sprachen akzeptiert werden gilt das Substitutionsprinzip nicht mehr (SCHLECHT)
 			\item Das Verhalten der Unterklassen muss zum Verhalten der Oberklasse passen
 		\end{itemize}
-	\section{Thread}
+	\subsection{Thread}
 		\begin{itemize}
 			\item parallel ablaufende Steuerflüsse
 			\item SCOOP: Thread-freies Programm jedoch paralleler Entwurf von objektorientierten Programm (asynchroner Aufruf)
 		\end{itemize}
-	\section{Softwareentwicklung}
 		\subsection{Softwareentwicklung}
 			\begin{itemize}
 				\item Softwareentwicklgung muss in einen Aufgabenanalyse-, Aufgabenbewertungs-,Aufgabengestaltungsprozess eingebettet sein
@@ -466,5 +466,53 @@
 				\item Zerlegung von Aufgaben in Teilaufgaben
 				\item Beschreibung der Reihenfolge
 			\end{itemize}
-
+		\subsection{CTT-Aufgabenmodelle}
+			\begin{description}
+				\item[Alternative:] T1[]T2
+				\item[Nebenläufigkeit:]T1|||T2
+				\item[Deaktivierung:]T1[>T2
+				\item[Unterbrechung und Fortsetzen:] T1|>T2
+				\item[Sequenz:] T1 >> T2
+				\item[Optionalität:] [T]
+			\end{description}
+	\section{UI-Pattern}
+		\subsection{Allgemein}
+			\begin{itemize}
+				\item UI-Pattern: Vorschlag für Verwendung und Anordnung von Elementen
+			\end{itemize}
+		\subsection{Patterns}
+			\subsubsection{Organizing the Content}
+				\begin{description}
+					\item[Two-Panel Selector:] 2 Panels, Auswahl von Objekten im ersten Panel, detaillierte Ansicht im zweiten
+					\item[One-Window Drilldown:] Liste von Items in einem einzelnen Fenster
+					\item[Extra on Demand:] nur wichtigen Inhalt einzigen, auf Bedarf komplexe Darstellungen
+				\end{description}
+			\subsubsection{Organizing the Page}
+				\begin{description}
+					\item [Split Navigation] Darstellung hierarisch gespeicherten Informationen, schnelle Navigation
+					\item[Global Navigation:] wichtige Menüpunkte global auf jder Seite
+					\item[Card Stack:] Inhalt auf Panels aufgeteilt, nur ein Panel zur gleichen Zeit
+				\end{description}
+	\section{Techniken}
+		\subsection{Extreme Programming}
+			\begin{itemize}
+				\item Versprechen Programmierer: jeden Tag an etwas neues arbeiten und keine heikle Situation alleine dazustehen
+				\item Versprechen Kunden: Sichtbarkeit von Fortschritt, lauffähiger Prototyp nach kurzer Zeit, Programmierzeit wird optimal genutzt 
+				\item Gelöste Probleme: Verzögerungen, Fehlerrate, Projektabbruch
+				\item Grundwerte: Einfachheit (einfaches Code-Design, Refactoring, Tests), Kommunikation (Kunde ist Vor-Ort, Programmierung in Paaren, Code und Tests als Dokumentation), Feedback(kurze Releasezyklen, Echtzeit-Rückmeldung durch Kunde, Kunde bestimmt Priorität), Mut(Schlichtheit schwer zu lernen, gemeinsame Code, Programmierung in Paaren führt zur Produktivitätsverlust)
+			\end{itemize}
+		\subsection{Testen}
+			\begin{itemize}
+				\item Right: Teste ob das Richtige berechnet wird
+				\item Boundary: Teste die Grenzen (fehlende Werte, Sonderzeichen usw \dots)
+				\item Inverse: Teste falls die Funktion umkehrbar ist, ob der Ausgangswert rauskommt
+				\item Cross-Check: Teste ob die Funktion genau so wie die eine Funktion mit selber Semantik funktioniert
+				\item Error-Conditions: ungültige Eingaben (Exceptions)
+				\item Performance: Teste ob die Funktion den Anspruch an Performance erfüllt
+				\item Gute Tests: Automatisch, Teste alles, bei dem es wahrscheinlich ist, dass es schief geht, Tests immer ausführbar, Tests sind unabhängig und klein, Professioneller Standard
+			\end{itemize}
+		\subsection{Scrum}
+			\begin{itemize}
+				\item
+			\end{itemize}
 \end{document}
