@@ -327,9 +327,95 @@
 					\end{itemize}
 				\item Ablauf:
 					\begin{enumerate}
-						\item
+						\item TODO
 					\end{enumerate}
-				\item Beispiel:			
+				\item Beispiel:	 TODO		
+			\end{itemize}
+			TODOq
+			\newpage
+		\subsubsection{Strategie}
+			\begin{itemize}
+				\item Kategorie: Verhaltensmuster
+				\item Zweck: Definiert eine Familie von Algorithmen, kapselt jeden einzelnen und macht ihn austauschbar.
+				\item Akteure: 
+					\begin{itemize}
+						\item Strategie: deklariert Schnittstelle, die von allen unterstützen Algorithmen angeboten wird
+						\item KonkreteStrategie: implementiert Strategie Schnittstelle
+						\item Kontext: wird mit KonkreteStrategie-Objekt konfuguriert, verwaltet die Referenz auf Strategieobjekt
+						\item kann Schnittstelle definieren, die Strategieobjekten den Zugriff auf die Daten des Kontextes ermöglicht
+					\end{itemize}
+				\item Ablauf:
+					\begin{enumerate}
+						\item Strategie Schnittstelle beschreiben
+						\item KonkreteStrategien implementieren
+						\item Kontext mit KonkreteStrategie erstellen mit Verweis auf Strategie Schnittstelle
+					\end{enumerate}
+				\item Beispiel: Verschiedene Sortieralgorithmen (Strategie) für verschiedene Sortierverfahren (Quicksort, Heapsort) für eine Liste (Kontext)
+			\end{itemize}
+			\includegraphics[scale=0.7]{images/strategie.png}
+			\newpage
+		\subsubsection{Composite}
+			\begin{itemize}
+				\item Kategorie: Strukturmuster
+				\item Zweck: Zusammensetzung von Objekten zu einer Baumstruktur um eine Teil-Ganzes Hierachie. Erlaubt den Klient einzelne und zusammengesetzte Objekte einheitlich zu behandeln.
+				\item Akteure: 
+					\begin{itemize}
+						\item Komponente: definiert als Basisklasse das gemeinsame Verhalten aller Teilnehmer.
+						\item Blatt: repräsentiert Einzelobjekt, hat keine Kinder
+						\item Kompositum: enthält weitere Kompositum und Blätter (dadruch entsteht die Baumstruktur)
+					\end{itemize}
+				\item Beispiel: Grafiken zeichen (Komponente), eine Grafik besteht dabei aus einem Text oder Rechteck (Blatt) oder setzt sich weiter zusammen (Kompositium)
+			\end{itemize}
+			\includegraphics[scale=0.7]{images/composite.png}
+			\newpage
+		\subsubsection{State}
+			\begin{itemize}
+				\item Kategorie: Verhaltensmuster
+				\item Zweck: Ermöglicht es einen Objekt, sein Verhalten zu ändern, wenn sich sein interner Zustand geändert hat.
+				\item Akteure: 
+					\begin{itemize}
+						\item Kontext: definiert Schnittstelle für den Klient, verwaltet eine Instanz einer konkreten Zustandsunterklasse
+						\item Zustand: definiert Schnittstelle für die Kapselung des mit einem bestimmten Zustand des Kontextobjektes verbundenen Verhalten
+						\item KonkreterZustand: implementiert die Zustand Schnittstelle und beschreibt das Verhalten
+					\end{itemize}
+				\item Ablauf:
+					\begin{enumerate}
+						\item Kontext definieren
+						\item Zustand definieren
+						\item KonkreteZustände implementieren
+						\item Methodenaufruf auf Kontext ändert die Referenz auf das Zustandsobjekt durch einen neuen konkreten Zustand
+					\end{enumerate}
+				\item Beispiel: Eine TCPVerbindung(Kontext) ermöglicht es eine Verbindung aufzubauen, zu schließen. Die TCPVerbidung speichtert eine TCPZustand(Zustand) referenz auf einen Konkreten TCPZustand wie TCPOffen oder TCPGeschlossen
+			\end{itemize}
+			\newpage
+		\subsubsection{Decorator}
+			\begin{itemize}
+				\item Kategorie: Strukturmuster
+				\item Zweck: Erweitert ein Objekt dynamisch um Zuständigkeiten, flexible Alternative zur Unterklassenbildung, um die Funktionalität einer Klasse zu erweitern
+				\item Akteure: 
+					\begin{itemize}
+						\item TODO
+					\end{itemize}
+				\item Ablauf:
+					\begin{enumerate}
+						\item TODO
+					\end{enumerate}
+				\item Beispiel: TODO
+			\end{itemize}
+			\newpage
+		\subsubsection{Facade}
+			\begin{itemize}
+				\item Kategorie: Strukturmuster
+				\item Zweck: Bietet eine einheitliche Schnittstelle von Schnittstellen eines Subsystems. Entkoppelt Klienten von Subystem.
+				\item Akteure: 
+					\begin{itemize}
+						\item Facade: Implementiert eine Schnittstelle für das Subsystem welches angesprochen werden soll
+					\end{itemize}
+				\item Ablauf:
+					\begin{enumerate}
+						\item Facade implementieren so das alle benötigten Teile des Subsystemes bequem genutzt werden könne. Vorteil: Eine Facade ist zentrale Stelle für die Arbeit mit dem Subsystem, dadruch leichter zu warten und besser zum Fehler finden.
+					\end{enumerate}
+				\item Beispiel: Compiler(Facade) stellt Funktion zum compilieren eines Programmtextes. Das Subsystem (Parser, Scanner, Lexer, Codegenerator) werden über die Facade entsprechend der Semantik angesprochen. Man erhält also eine Kapselung der Interna eines Compilers nach aussen. 
 			\end{itemize}
 \end{document}
 				\item Kategorie:
