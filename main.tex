@@ -53,7 +53,26 @@
 \begin{document}
 \maketitle
 \tableofcontents
-	\section{Einteilung}
+	\section{Grundbegriffe}
+		\begin{description}
+			\item[Kapselung:] Auf Daten können nicht direkt zugegriffen werden
+			\item[Objekt:] Gegenstand des Interesses, Identität, Verhalten(Methoden), Eigenschaften[Attribute]
+			\item[Attribute:] Daten einer Klasse, alle Objekte einer Klasse gleiche Eigenschaften
+			\item[Methode:] Algorithmus, der einem Objekt zugeordnet ist
+			\item[Botschaft:] Nachricht, die gleichnamige Methode aktiviert
+			\item[Vererbung:] Weiterleitung von Informationen von oben nach unten, Unterklasse erbt Attribute, Methoden und Assoziationen oder Oberklasse
+			\item[Polymorphismus:]  Eine Botschaft akiviert bei unterschiedlichen Objekten Methoden mit verschiedenen Semantiken
+			\item[Dynamisches Binden:] Es wird erst zur Laufzeit entschieden, welche Methode durch eine Botschaft aktiviert wird
+			\item[Konformität:] Falls Klasse A, direkt oder indirekt eine Klasse B beerbt, heißt B Nachkomme (A konform zu B)
+			\item[Vorfahre:] Falls B von A erbt heisst A Vorfahre
+			\item[Verfeinerung]: Geerbte Eigenschaften und Methoden werden modifiziert
+			\item[Mehrfachvererbung:] Eine Klasse erbt von meheren Klassen. Problem: Vorfahren haben Methoden mit selben Name, Lösung: Umbennung
+			\item[Substitutionsprinzip:] Ein Objekt einer Unterklasse kann die Rolle eines Objektes entsprechenden Oberklasse übernehmen.
+			\item[Typsicheres Programm:] Es kann zur Compilezeit entschieden werden, das keine Nachricht an ein Objekt gesendet werden, für für die das Objekt keine entsprechende Schnittstelle besitzt.
+			\item[Kovarianz:] Methoden einer Unterklasse sollen keine Werte zurückliefern, die man nicht Vereinbart hat
+			\item[Kontravarianz:]Objekte der Oberklasse müssen durch Objekte der Unterklasse ersetzbar sein
+			\end{description}
+	\section{Einteilung von Patterns}
 		\subsection{Anwendungsbereich: Klassenmuster}
 			\begin{itemize}
 				\item Beziehungen von Klassen zur Compilezeit festsetzen
@@ -422,8 +441,10 @@
 					\end{itemize}
 				\item Ablauf:
 					\begin{enumerate}
-						\item Facade implementieren so das alle benötigten Teile des Subsystemes bequem genutzt werden könne. Vorteil: Eine Facade ist zentrale Stelle für die Arbeit mit dem Subsystem, dadruch leichter zu warten und besser zum Fehler finden.
+						\item Facade implementieren so das alle benötigten Teile des Subsystemes bequem genutzt werden könne. Vorteil: Eine Facade ist zentrale Stelle für die Arbeit mit dem Subsystem, dadurch leichter zu warten und besser zum Fehler finden.
 					\end{enumerate}
 				\item Beispiel: Compiler(Facade) stellt Funktion zum compilieren eines Programmtextes. Das Subsystem (Parser, Scanner, Lexer, Codegenerator) werden über die Facade entsprechend der Semantik angesprochen. Man erhält also eine Kapselung der Interna eines Compilers nach außen. 
 			\end{itemize}
+	\section{Verhalten}
+
 \end{document}
