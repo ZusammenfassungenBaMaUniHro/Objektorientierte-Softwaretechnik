@@ -147,9 +147,9 @@
 					\end{itemize}
 				\item Ablauf:
 					\begin{enumerate}
-						\item Client führt Befehl aus
-						\item Befehl kennt Empfänger und ruft execute() auf Empfänger auf
-						\item Implementierung von Undo und Redo über Speicherung der Befehle im Aufrufer
+						\item Client führt Befehl im Programm aus
+						\item Konkretes Befehlsobjekt wird an Aufrufer übergeben (Merkt sich Reihenfolge)
+						\item Aufrufer ruft Befehlsobjekt auf
 					\end{enumerate}
 				\item Beispiel: zeilenweises Editieren mit einem Texteditor (Löschen, Ersetzen, Einfügen) und diese Aktionen rückgängig machen
 			\end{itemize}
