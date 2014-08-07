@@ -60,17 +60,20 @@
 			\item[Attribute:] Daten einer Klasse, alle Objekte einer Klasse gleiche Eigenschaften
 			\item[Methode:] Algorithmus, der einem Objekt zugeordnet ist
 			\item[Botschaft:] Nachricht, die gleichnamige Methode aktiviert
-			\item[Vererbung:] Weiterleitung von Informationen von oben nach unten, Unterklasse erbt Attribute, Methoden und Assoziationen oder Oberklasse
+			\item[Vererbung:] Weiterleitung von Informationen von oben nach unten, Unterklasse erbt Attribute, Methoden und Assoziationen oder Oberklasse, Wiederverwendung (spezialisieren $\rightarrow$ überschreiben, erweitern$\rightarrow$ hinzufügen)
 			\item[Polymorphismus:]  Eine Botschaft akiviert bei unterschiedlichen Objekten Methoden mit verschiedenen Semantiken
 			\item[Dynamisches Binden:] Es wird erst zur Laufzeit entschieden, welche Methode durch eine Botschaft aktiviert wird
 			\item[Konformität:] Falls Klasse A, direkt oder indirekt eine Klasse B beerbt, heißt B Nachkomme (A konform zu B)
 			\item[Vorfahre:] Falls B von A erbt heisst A Vorfahre
+			\item[Verhalten:] Methoden $\rightarrow$ Sequenzdiagramm
 			\item[Verfeinerung]: Geerbte Eigenschaften und Methoden werden modifiziert
 			\item[Mehrfachvererbung:] Eine Klasse erbt von meheren Klassen. Problem: Vorfahren haben Methoden mit selben Name, Lösung: Umbennung
-			\item[Substitutionsprinzip:] Ein Objekt einer Unterklasse kann die Rolle eines Objektes entsprechenden Oberklasse übernehmen.
+			\item[Substitutionsprinzip:] Ein Objekt einer Unterklasse kann die Rolle eines Objektes entsprechenden Oberklasse übernehmen - nur möglich, wenn es sich wie das der Oberklasse verhält.
 			\item[Typsicheres Programm:] Es kann zur Compilezeit entschieden werden, das keine Nachricht an ein Objekt gesendet werden, für für die das Objekt keine entsprechende Schnittstelle besitzt.
-			\item[Kovarianz:] Methoden einer Unterklasse sollen keine Werte zurückliefern, die man nicht Vereinbart hat
-			\item[Kontravarianz:]Objekte der Oberklasse müssen durch Objekte der Unterklasse ersetzbar sein
+			\item[Typsicherheit 2:] nur bei \textbf{kontravarianten Eingabeparametertypen} und \textbf{kovarianten Ergebnistypen} möglich.
+			\item[Kovarianz:] Methoden einer Unterklasse sollen keine Werte zurückliefern, die man nicht Vereinbart hat. (Einschränkung der Menge der erlaubten Parameter)
+			\item[Kontravarianz:]Objekte der Oberklasse müssen durch Objekte der Unterklasse ersetzbar sein. (Erweiterung der Menge an erlaubten Parametern)
+			\item[Invarianz:] kann als Spezialfall für beide Varianten angesehen werden. (Gleiche Ein- und Ausgabe Menge wie die der Oberklasse)
 			\end{description}
 	\section{Einteilung von Patterns}
 		\subsection{Anwendungsbereich: Klassenmuster}
@@ -112,9 +115,11 @@
 				\item Zweck: Bei Änderungen des Zustandes sollen alle abhängigen Objekte benachrichtigt und aktualisiert werden 
 				\item Akteure:
 					\begin{itemize}
-						\item Subjekt: kennt Liste von Beobachtern, Schnittstelle für An- und Abmelden von Beobachtern
+						\item Subjekt: kennt Liste von Beobachtern, Schnittstelle für An- und Abmelden von Beobachtern\\
+						(ist von Interesse)
 						\item KonkretesSubjekt: speichert des Zustand und benachrichtigt alle Beobachter bei Änderungen des Zustandes
-						\item Beobachter: definiert Aktualisierungsschnittstelle
+						\item Beobachter: definiert Aktualisierungsschnittstelle\\
+						(beobachtet jemanden $\rightarrow$ wird informiert)
 						\item KonkreterBeobachter: Referenz zum KonkretenSubjekt, speichert den Zustand, implementiert Beobachter
 					\end{itemize}
 				\item Ablauf:
@@ -153,6 +158,8 @@
 			\begin{itemize}
 				\item Kategorie: Verhaltensmuster
 				\item Zweck: Bereitstellung einer sequentiellen Reihenfolge von zusammengesetzte Objekte (Liste, Bäume, etc) mit Abstraktion von der Datenstruktur
+				
+				\item Garantie, dass jedes Element nur einmal sequenziell durchlaufen wird
 				\item Akteure: 
 					\begin{itemize}
 						\item Iterator: definiert Schnittstelle für den Besuch von Elementen
@@ -194,6 +201,7 @@
 			\begin{itemize}
 				\item Kategorie: Verhaltensmuster
 				\item Zweck: Kapselung einer auf den Elementen einer Objektstruktur auszuführenden Operation als ein Objekt. Definition einer neuen Operation ohne Veränderung der Klasse der von ihr bearbeiteten Elemente.
+				\item Die Datenstruktur darf sich nicht verändern. Durch Vistor ist es möglich in Zukunft das Verhalten zu erweitern.
 				\item Akteure: 
 					\begin{itemize}
 						\item Besucher: deklariert Besuche-Operationen Schnittstelle für konkrete Elemente
@@ -233,7 +241,7 @@
 		\subsubsection{State}
 			\begin{itemize}
 				\item Kategorie: Verhaltensmuster
-				\item Zweck: Ermöglicht es einen Objekt, sein Verhalten zu ändern, wenn sich sein interner Zustand geändert hat.
+				\item Zweck: Ermöglicht es einen Objekt, sein Verhalten zu ändern, wenn sich sein interner Zustand geändert hat. Das Verhalten des Objektes wird gekapselt und ausgegliedert in ein Zustandsobjekt, das das Verhalten regelt - es ist dem Objekt zugeordnet.
 				\item Akteure: 
 					\begin{itemize}
 						\item Kontext: definiert Schnittstelle für den Klient, verwaltet eine Instanz einer konkreten Zustandsunterklasse
@@ -249,13 +257,12 @@
 					\end{enumerate}
 				\item Beispiel: Eine TCPVerbindung(Kontext) ermöglicht es eine Verbindung aufzubauen, zu schließen. Die TCPVerbidung speichtert eine TCPZustand(Zustand) referenz auf einen Konkreten TCPZustand wie TCPOffen oder TCPGeschlossen
 			\end{itemize}
-			\includegraphics[scale=0.6]{images/state.jpg}
 			\newpage
 		\subsection{Erzeugungsmuster}
 		\subsubsection{Prototype}
 			\begin{itemize}
 				\item Kategorie: Erzeugungsmuster
-				\item Zweck: Instanz eines Objektes wird zur Erzeugung weiterer Objekte genutzt, welche dabei Kopien der Instanz sind
+				\item Zweck: Instanz eines Objektes wird zur Erzeugung weiterer Objekte genutzt, welche dabei Kopien der Instanz sind. Ressourcen können gespart werden durch das kopieren einer Initialinstanz.
 				\item Akteure: 
 					\begin{itemize}
 						\item Prototype: Schnittstelle welche das Klonen von Objekten zusichert
@@ -337,6 +344,7 @@
 			\begin{itemize}
 				\item Kategorie: Erzeugungsmuster
 				\item Zweck: Definiert eine Schnittstelle zur Erzeugung eines Objektes, wobei die Unterklassen entscheiden, von welcher Klasse das zu erzeugende Objekt ist.
+				\item Fabrik übernimmt den Konstruktorteil und gibt ein echtes neues Objekt zurück. Sinnvoll, um ein Framework vor dem Klauen der Idee zu schützen, obwohl selbiges auf eine Initialisierung mittels Konstruktor angewiesen ist.
 				\item Akteure: 
 					\begin{itemize}
 						\item Produkt: bietet Schnittstelle nach ausssen
@@ -354,6 +362,7 @@
 			\begin{itemize}
 				\item Kategorie: Strukturmuster
 				\item Zweck: Entkoppelung einer Abstraktion von ihrer Implementierung
+				\item Falls sich Schnittstellen ändern können sie angepasst werden. Es muss wenig geändert werden - lediglich der Aufruf der Methode in der Bridge. Wird verwendet wenn die Wahrscheinlichkeit für eine Veränderung der Methode groß ist.
 				\item Akteure: 
 				\begin{itemize}
 					\item Abstraktion: verwaltet Referenz auf Implementierer, definiert Schnittstelle der Abstraktion
@@ -385,6 +394,7 @@
 					\item Spezifikation von Ziel
 					\item Implementation der Schnittstelle Ziel im Adapter unter Verwendung von Mehrfachvererbung(Klassenadapter) bzw. Objektkomposition(Objektadapter)
 				\end{enumerate}
+				\item Mehrfachvererbung kann nicht durch Delegation aufgelöst werden, da dadurch zum Verlust des Substitutionsprizips kommt.
 				\item Beispiel: Austausch einer Bibliothek durch eine mit ähnlichen Funktionen, dadurch viel Aufwand den Code neu anzupassen. Adapter Lösung: Altes Interface durch Nutzung der neuen Bibliothek nachstellen.
 			\end{itemize}
 			\includegraphics[scale=0.7]{images/adapter.png}
